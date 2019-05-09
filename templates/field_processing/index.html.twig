@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FieldProcessing report{% endblock %}
+
+{% block body %}
+    <h1>FieldProcessing index</h1>
+    <br>
+    <form method="get">
+        <b>Search by : </b>
+        <label for="field">Field</label>
+        <select name="field_id" id="field">
+            <option value="" {% if data.field_id == "" %}SELECTED{% endif %}>All</option>
+            {% for field in data.fields %}
+                <option value="{{field.id}}" {% if data.field_id == field.id %}SELECTED{% endif %}>{{field.name}}</option>
+            {% endfor %}
+        </select>
+        &nbsp; &nbsp;
+        <label for="crop">Crop</label>
+        <select name="crop_id" id="crop">
+            <option value="" {% if data.crop_id == "" %}SELECTED{% endif %}>All</option>
+            {% for crop in data.crops %}
+                <option value="{{crop.id}}" {% if data.crop_id == crop.id %}SELECTED{% endif %}>{{crop.name}}</option>
+            {% endfor %}
+        </select>
+        &nbsp; &nbsp;
+        <label for="tractor">Tractor</label>
+        <select name="tractor_id" id="tractor">
+            <option value="" {% if data.tractor_id == "" %}SELECTED{% endif %}>All</option>
+            {% for tractor in data.tractors %}
+                <option value="{{tractor.id}}" {% if data.tractor_id == tractor.id %}SELECTED{% endif %}>{{tractor.name}}</option>
+            {% endfor %}
+        </select>
+        &nbsp; &nbsp;
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <hr>
+    <p>
+        <b>Total processing : </b>{{data.sum}}
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Culture</th>
+                <th>Date</th>
+                <th>Tractor</th>
+                <th>Area</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for field_processing in data.processings %}
+            <tr>
+                <td>{{ field_processing.field.name }}</td>
+                <td>{{ field_processing.crop.name }}</td>
+                <td>{{ field_processing.date ? field_processing.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ field_processing.tractor.name }}</td>
+                <td>{{ field_processing.area }}</td>
+                <td>
+                    <a href="{{ path('field_processing_show', {'id': field_processing.id}) }}">show</a>
+                    <a href="{{ path('field_processing_edit', {'id': field_processing.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('field_processing_new') }}">Create new</a>
+{% endblock %}

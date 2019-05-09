@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit FieldProcessing{% endblock %}
+
+{% block body %}
+    <h1>Edit FieldProcessing</h1>
+
+    {{ include('field_processing/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('field_processing_index') }}">back to list</a>
+
+    {{ include('field_processing/_delete_form.html.twig') }}
+{% endblock %}

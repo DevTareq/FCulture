@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New FieldProcessing{% endblock %}
+
+{% block body %}
+    <h1>Create new FieldProcessing</h1>
+
+    {{ include('field_processing/_form.html.twig') }}
+
+    <a href="{{ path('field_processing_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Crop{% endblock %}
+
+{% block body %}
+    <h1>Create new Crop</h1>
+
+    {{ include('crop/_form.html.twig') }}
+
+    <a href="{{ path('crop_index') }}">back to list</a>
+{% endblock %}

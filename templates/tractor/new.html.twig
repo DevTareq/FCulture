@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Tractor{% endblock %}
+
+{% block body %}
+    <h1>Create new Tractor</h1>
+
+    {{ include('tractor/_form.html.twig') }}
+
+    <a href="{{ path('tractor_index') }}">back to list</a>
+{% endblock %}
